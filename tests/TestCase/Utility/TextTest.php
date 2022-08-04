@@ -656,30 +656,29 @@ TEXT;
     public function testTruncateTrimWidth(): void
     {
         $text = 'The quick brown fox jumps over the lazy dog';
-        var_dump(Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false]));
-        $this->assertEquals('The quick brown...', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false]));
-        $this->assertEquals('The quick brown...', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => true]));
+        $this->assertEquals('The quick brown...', (string)Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false]));
+        $this->assertEquals('The quick brown...', (string)Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => true]));
 
         $text = 'はしこい茶色の狐はのろまな犬を飛び越える';
-        $this->assertEquals('はしこい茶色の狐はのろまな犬を...', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false]));
-        $this->assertEquals('はしこい茶色の...', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => true]));
+        $this->assertEquals('はしこい茶色の狐はのろまな犬を...', (string)Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false]));
+        $this->assertEquals('はしこい茶色の...', (string)Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => true]));
 
         $text = 'はしこい茶色の狐 - The quick brown fox';
-        $this->assertEquals('はしこい茶色の狐 - The quick bro...', Text::truncate($text, 27, ['ellipsis' => '...', 'trimWidth' => false]));
-        $this->assertEquals('はしこい茶色の狐 - The q...', Text::truncate($text, 27, ['ellipsis' => '...', 'trimWidth' => true]));
-        $this->assertEquals('はしこい茶色の狐 - The...', Text::truncate($text, 27, ['ellipsis' => '...', 'trimWidth' => true, 'exact' => false]));
+        $this->assertEquals('はしこい茶色の狐 - The quick bro...', (string)Text::truncate($text, 27, ['ellipsis' => '...', 'trimWidth' => false]));
+        $this->assertEquals('はしこい茶色の狐 - The q...', (string)Text::truncate($text, 27, ['ellipsis' => '...', 'trimWidth' => true]));
+        $this->assertEquals('はしこい茶色の狐 - The...', (string)Text::truncate($text, 27, ['ellipsis' => '...', 'trimWidth' => true, 'exact' => false]));
 
         $text = '<p>はしこい<font color="brown">茶色</font>の狐はのろまな犬を飛び越える</p>';
-        $this->assertEquals('<p>はしこい<font color="brown">茶色</font>の狐はのろまな犬を...</p>', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false, 'html' => true]));
-        $this->assertEquals('<p>はしこい<font color="brown">茶色</font>の...</p>', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => true, 'html' => true]));
+        $this->assertEquals('<p>はしこい<font color="brown">茶色</font>の狐はのろまな犬を...</p>', (string)Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false, 'html' => true]));
+        $this->assertEquals('<p>はしこい<font color="brown">茶色</font>の...</p>', (string)Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => true, 'html' => true]));
 
         $text = <<<HTML
 <IMG src="mypic.jpg">このimageタグはXHTMLに準拠していない！<br>
 <hr/><b>でも次のimageタグは準拠しているはず <img src="mypic.jpg" alt="私の、私自身そして私" /></b><br />
 素晴らしい、でしょ?
 HTML;
-        $this->assertEquals("<IMG src=\"mypic.jpg\">このimageタグはXHTMLに準拠していない！<br>\n<hr/><b>でも次の…</b>", Text::truncate($text, 30, ['html' => true]));
-        $this->assertEquals('<IMG src="mypic.jpg">このimageタグはXHTMLに準拠し…', Text::truncate($text, 30, ['html' => true, 'trimWidth' => true]));
+        $this->assertEquals("<IMG src=\"mypic.jpg\">このimageタグはXHTMLに準拠していない！<br>\n<hr/><b>でも次の…</b>", (string)Text::truncate($text, 30, ['html' => true]));
+        $this->assertEquals('<IMG src="mypic.jpg">このimageタグはXHTMLに準拠し…', (string)Text::truncate($text, 30, ['html' => true, 'trimWidth' => true]));
     }
 
     /**
