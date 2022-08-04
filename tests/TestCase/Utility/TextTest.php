@@ -656,6 +656,7 @@ TEXT;
     public function testTruncateTrimWidth(): void
     {
         $text = 'The quick brown fox jumps over the lazy dog';
+        var_dump(Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false]));
         $this->assertSame('The quick brown...', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => false]));
         $this->assertSame('The quick brown...', Text::truncate($text, 18, ['ellipsis' => '...', 'trimWidth' => true]));
 
